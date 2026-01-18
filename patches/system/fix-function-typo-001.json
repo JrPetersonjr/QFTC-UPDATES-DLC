@@ -1,0 +1,18 @@
+{
+  "id": "fix-function-typo-001",
+  "name": "Fix game.js Function Typo",
+  "version": "2.0.1",
+  "description": "Fixes critical typo in game.js where handleCommand was declared as 'ffunction' instead of 'function'",
+  "changes": [
+    {
+      "type": "replace",
+      "line": 109,
+      "file": "game.js",
+      "old_content": "ffunction handleCommand() {",
+      "new_content": "function handleCommand() {"
+    }
+  ],
+  "createdAt": "2025-01-18T00:00:00.000000",
+  "required": true,
+  "critical": true
+}
