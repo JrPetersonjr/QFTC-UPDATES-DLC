@@ -1,0 +1,17 @@
+{
+  "id": "cors_and_port_fix",
+  "version": "1.0.0",
+  "description": "Fix CORS origins and update app.run() for Render compatibility.",
+  "changes": [
+    {
+      "target_file": "secure_patch_server.py",
+      "find": "CORS(app, resources={",
+      "replace": "CORS(app, resources={r\"/api/*\": {\"origins\": \"*\"}})  # Updated for Render"
+    },
+    {
+      "target_file": "secure_patch_server.py",
+      "find": "app.run(debug=True, host='localhost', port=5000)",
+      "replace": "app.run(host=\"0.0.0.0\", port=int(os.environ.get(\"PORT\", 5000)), debug=False)  # Render-compatible"
+    }
+  ]
+}

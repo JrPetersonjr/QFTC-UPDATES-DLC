@@ -31,13 +31,8 @@ import logging
 load_dotenv()
 app = Flask(__name__)
 limiter = Limiter(app=app, key_func=get_remote_address, default_limits=["200 per day", "50 per hour"])
-CORS(app, resources={
-    r"/api/*": {
-        "origins": ["http://localhost:5000", "http://localhost:3000"],
-        "methods": ["GET", "POST", "OPTIONS"],
-        "allow_headers": ["Content-Type", "Authorization"]
-    }
-})
+CORS(app, resources={r"/api/*": {"origins": "*"}})
+
 
 # Setup logging
 logging.basicConfig(level=logging.INFO)
@@ -806,4 +801,8 @@ if __name__ == '__main__':
     else:
         print("⚠️  LM Studio not detected. Make sure it's running on http://localhost:1234")
     
-    app.run(debug=True, host='localhost', port=5000)
+app.run(
+    host="0.0.0.0",
+    port=int(os.environ.get("PORT", 5000)),
+    debug=False
+)
